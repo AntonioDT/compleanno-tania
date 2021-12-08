@@ -10,6 +10,9 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
+    @media (min-width: 1440px) {
+        background-size: cover;
+    }
 }
 
 main {
