@@ -16,8 +16,8 @@ window.addEventListener('load', () => {
     let totalSeconds;
     
     function init() {
-        //totalSeconds = Math.floor((new Date('01/08/2022') - new Date()) / 1000); 
-        totalSeconds = Math.floor((Date.parse(endtime) - Date.parse(new Date())) / 1000);
+        totalSeconds = Math.floor((new Date('01/08/2022') - new Date()) / 1000); 
+        /* totalSeconds = Math.floor((Date.parse(endtime) - Date.parse(new Date())) / 1000); */
         setTimeLeft();
         let interval = setInterval(() => {
             if (totalSeconds < 0) {
