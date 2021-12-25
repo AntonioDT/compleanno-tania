@@ -1,4 +1,6 @@
 const endtime = "2022-01-08 00:00:00:00";
+let xDown = null;
+let yDown = null;
 
 window.addEventListener('load', () => {
     const days = document.querySelector('.days')
@@ -95,3 +97,33 @@ window.addEventListener('load', () => {
     
     init();
 });
+
+$(document).ready(function () {
+    let foto = $(".foto");
+    $('.header').on('touchstart', function(evt) {
+        const firstTouch = evt.touches[0];                                      
+        xDown = firstTouch.clientX;                                      
+        yDown = firstTouch.clientY; 
+    })
+    $('.header').on('touchmove', function(evt) {
+        if (!xDown || !yDown) {
+            return;
+        }
+        var xUp = evt.touches[0].clientX;                                    
+        var yUp = evt.touches[0].clientY;
+
+        var xDiff = xDown - xUp;
+        var yDiff = yDown - yUp;
+                                                                            
+        if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+            if ( xDiff > 0 ) {
+                foto.attr("src", "images/tania2.jpg");
+            } else {
+                foto.attr("src", "images/taniajpg.jpg");
+            }                       
+        }
+        /* reset values */
+        xDown = null;
+        yDown = null;
+    })
+})
