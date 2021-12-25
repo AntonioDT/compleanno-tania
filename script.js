@@ -2,6 +2,26 @@ const endtime = "2022-01-08 00:00:00:00";
 let xDown = null;
 let yDown = null;
 
+let images = [
+    {
+        id: 0,
+        path: "images/taniajpg.jpg"
+    },
+    {
+        id: 1,
+        path: "images/tania2.jpg"
+    },
+    {
+        id: 2,
+        path: "images/tania3.jpg"
+    },
+    {
+        id: 3,
+        path: "images/tania4.jpg"
+    }
+];
+let imageIndex = 0;
+
 window.addEventListener('load', () => {
     const days = document.querySelector('.days')
     const hours = document.querySelector('.hours')
@@ -117,10 +137,20 @@ $(document).ready(function () {
                                                                             
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
             if ( xDiff > 0 ) {
-                foto.attr("src", "images/tania2.jpg");
+                if (imageIndex < 3) {
+                    imageIndex ++;
+                } else {
+                    imageIndex = 0;
+                }
             } else {
-                foto.attr("src", "images/taniajpg.jpg");
-            }                       
+                if (imageIndex == 0) {
+                    imageIndex = images.length - 1;
+                } else {
+                    imageIndex --;
+                }
+            }
+            let src = images.find(el => el.id == imageIndex).path;
+            foto.attr("src", src);               
         }
         /* reset values */
         xDown = null;
