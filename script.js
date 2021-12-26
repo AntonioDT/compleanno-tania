@@ -22,6 +22,7 @@ let images = [
 ];
 let imageIndex = 0;
 
+
 window.addEventListener('load', () => {
     const days = document.querySelector('.days')
     const hours = document.querySelector('.hours')
@@ -120,6 +121,8 @@ window.addEventListener('load', () => {
 
 $(document).ready(function () {
     let foto = $(".foto");
+    let photoId = localStorage.getItem("photoId");
+    setImage(foto, photoId);
     $('.header').on('touchstart', function(evt) {
         const firstTouch = evt.touches[0];                                      
         xDown = firstTouch.clientX;                                      
@@ -137,7 +140,7 @@ $(document).ready(function () {
                                                                             
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
             if ( xDiff > 0 ) {
-                if (imageIndex < 3) {
+                if (imageIndex < images.length - 1) {
                     imageIndex ++;
                 } else {
                     imageIndex = 0;
@@ -148,12 +151,22 @@ $(document).ready(function () {
                 } else {
                     imageIndex --;
                 }
-            }
-            let src = images.find(el => el.id == imageIndex).path;
-            foto.attr("src", src);               
+            } 
+            setImage(foto, imageIndex);
+            localStorage.setItem("photoId", imageIndex);           
         }
         /* reset values */
         xDown = null;
         yDown = null;
     })
 })
+
+function setImage(foto, id) {
+    
+    if (id != null) {
+        let src = images.find(el => el.id == id).path;
+        foto.attr("src", src); 
+    } else {
+        foto.attr("src", "images/taniajpg.jpg"); 
+    }
+}
